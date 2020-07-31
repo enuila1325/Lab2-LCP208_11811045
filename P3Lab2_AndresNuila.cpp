@@ -1,7 +1,17 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-double NewtonRaphson(int a, double b);
+
+double NewtonRaphson(double x, double a, double b, double c, int contador)
+{
+    if (contador > 100)
+        return x;
+    double funcion = (a * pow(x, 2)) + (b * x) + c;
+    double derivada = 2 * (a * x) + b;
+    double division = funcion / derivada;
+    double raiz = x - division;
+    return NewtonRaphson(raiz, a, b, c, ++contador);
+}
 
 int aproximacionPi(int a);
 
@@ -16,7 +26,7 @@ int main()
         switch (opc)
         {
         case 1:
-            int a, b, c;
+            double a, b, c;
             cout << "Ingrese el valor de a-->";
             cin >> a;
             while (a == 0)
@@ -32,21 +42,16 @@ int main()
             double coorXVertice, coorYVertice, xParaPrimeraRaiz, xParaSegundaRaiz;
             coorXVertice = ((double)(-b) / (double)(2 * a));
             coorYVertice = (a * coorXVertice) + (b * coorXVertice) + c;
-            cout << "x=" << coorXVertice << "y=" << coorYVertice;
             xParaPrimeraRaiz = coorXVertice - 200;
             xParaSegundaRaiz = coorXVertice + 200;
-
+            cout << "Raiz 1--->" << NewtonRaphson(xParaPrimeraRaiz, a, b, c, 0) << endl;
+            cout << "Raiz 2--->" << NewtonRaphson(xParaSegundaRaiz, a, b, c, 0) << endl;
             break;
-        
+        case 2:
+            
+            break;
         default:
             break;
         }
     }
-}
-double NewtonRaphson(int a, double b){
-    if (a==100)
-    {
-        
-    }
-    
 }
