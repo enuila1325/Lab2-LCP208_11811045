@@ -14,7 +14,23 @@ double NewtonRaphson(double x, double a, double b, double c, int contador)
     return NewtonRaphson(raiz, a, b, c, ++contador);
 }
 
-int aproximacionPi(int a);
+int aproximacionPi(double acum, double acumDiv)
+{
+
+    if (acum < 0)
+    {
+        cout << 4 * acumDiv;
+    }
+    else
+    {
+        double numerador, denominador;
+        numerador = pow(-1.0, acum);
+        denominador = (2.0 * acum) + 1.0;
+        double div = numerador / denominador;
+        acumDiv += div;
+        aproximacionPi(acum - 1, acumDiv);
+    }
+}
 
 int main()
 {
@@ -22,7 +38,7 @@ int main()
     int opc = 0;
     while (resp == 's')
     {
-        cout << "EJERCICIO 1\nEJERCICIO 2\nEJERCICIO 3\nINGRESE UNA OPCION--->";
+        cout << "EJERCICIO 1\nEJERCICIO 2\nEJERCICIO 3\n0. SALIR\nINGRESE UNA OPCION--->";
         cin >> opc;
         switch (opc)
         {
@@ -61,7 +77,7 @@ int main()
             {
                 for (int j = 0; j < tam; j++)
                 {
-                    matrizDeDatos[i][j] = rand() % 99 - 10;
+                    matrizDeDatos[i][j] = 10 + rand() % (90);
                 }
             }
             cout << "Matriz Generada: " << endl;
@@ -91,7 +107,7 @@ int main()
                     sumaAuxParaDesviacion += pow((matrizDeDatos[i][j] - media), 2);
                 }
             }
-            double desviacionStandard = suma / (pow(tam, 2));
+            double desviacionStandard = sumaAuxParaDesviacion / (pow(tam, 2));
             for (int i = 0; i < tam; i++)
             {
                 for (int j = 0; j < tam; j++)
@@ -111,7 +127,18 @@ int main()
                 cout << endl;
             }
         }
-        break;
+        case 3:
+        {
+            int limite;
+            cout << "Ingrese el limite hasta donde llegara la sumatoria para la aproximacion" << endl;
+            cout << "->";
+            cin >> limite;
+            cout << "La aproximacion del numero pi es: " << endl;
+            cout << aproximacionPi(limite, 0.0) << endl;
+        }
+        case 0:
+            resp = 'n';
+            break;
         default:
             break;
         }
