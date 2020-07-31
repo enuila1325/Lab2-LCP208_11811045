@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 
 double NewtonRaphson(double x, double a, double b, double c, int contador)
@@ -26,6 +27,7 @@ int main()
         switch (opc)
         {
         case 1:
+        {
             double a, b, c;
             cout << "Ingrese el valor de a-->";
             cin >> a;
@@ -46,10 +48,70 @@ int main()
             xParaSegundaRaiz = coorXVertice + 200;
             cout << "Raiz 1--->" << NewtonRaphson(xParaPrimeraRaiz, a, b, c, 0) << endl;
             cout << "Raiz 2--->" << NewtonRaphson(xParaSegundaRaiz, a, b, c, 0) << endl;
-            break;
+        }
+        break;
         case 2:
-            
-            break;
+        {
+            int tam;
+            cout << "Ingrese el tamaño de la matriz: ";
+            cin >> tam;
+            double matrizDeDatos[tam][tam];
+            double matrizStandarizada[tam][tam];
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    matrizDeDatos[i][j] = rand() % 99 - 10;
+                }
+            }
+            cout << "Matriz Generada: " << endl;
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    cout << setw(3) << matrizDeDatos[i][j];
+                }
+                cout << endl;
+            }
+            int suma = 0;
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    suma += matrizDeDatos[i][j];
+                }
+            }
+            int cantidadElementos = tam * tam;
+            double media = (double)(suma) / (double)(cantidadElementos);
+            double sumaAuxParaDesviacion = 0;
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    sumaAuxParaDesviacion += pow((matrizDeDatos[i][j] - media), 2);
+                }
+            }
+            double desviacionStandard = suma / (pow(tam, 2));
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    matrizStandarizada[i][j] = (matrizDeDatos[i][j] - media) / desviacionStandard;
+                }
+            }
+            cout << endl;
+            cout << "Matriz Estandarizada: " << endl;
+            for (int i = 0; i < tam; i++)
+            {
+                for (int j = 0; j < tam; j++)
+                {
+                    cout << "[" << setw(10) << matrizStandarizada[i][j] << "]"
+                         << " ";
+                }
+                cout << endl;
+            }
+        }
+        break;
         default:
             break;
         }
