@@ -127,6 +127,7 @@ int main()
                 cout << endl;
             }
         }
+        break;
         case 3:
         {
             int limite;
@@ -136,6 +137,7 @@ int main()
             cout << "La aproximacion del numero pi es: " << endl;
             cout << aproximacionPi(limite, 0.0) << endl;
         }
+        break;
         case 0:
             resp = 'n';
             break;
